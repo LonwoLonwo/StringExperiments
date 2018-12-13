@@ -6,7 +6,7 @@ public class Loader
 {
     public static void main(String[] args) throws IOException {
         String text = "Вася заработал 5000 рублей, Петя - 7563 рубля, а Маша - 30000 рублей";
-        //Первый топорный вариант, для случая, когда мы знаем сколько цифр в зарплате.
+        //Первый топорный вариант, для случая, когда мы знаем сколько цифр в зарплате и для неизменных имён.
         String fragment1 = text.substring(15, 19);
         String fragment2 = text.substring(56, 61);
 
