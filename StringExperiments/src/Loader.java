@@ -15,6 +15,8 @@ public class Loader
         int sum = fr1 + fr2;
         System.out.println("Зарплата Васи и Маши: " + sum);
 
+        System.out.println();
+
         //Второй вариант, на случай, когда не знаем, сколько цифр в зарплате.
         int indexOf = text.indexOf("руб");
         int indexOf2 = text.lastIndexOf("руб");
@@ -34,25 +36,44 @@ public class Loader
         int fr3 = Integer.parseInt(fragment3);
         int fr4 = Integer.parseInt(fragment4);
         int sum2 = fr3 + fr4;
-        System.out.println("Общая сумма: " + sum2 + " руб.");
+        System.out.println("Зарплата Васи и Маши: " + sum2 + " руб.");
+
+        System.out.println();
+        //Вывод в консоль кодов всех латинских букв и кириллицы
+        LettersCode lettersCode = new LettersCode();
+        lettersCode.printCode();
+        System.out.println();
 
         //Разбивка ФИО
         System.out.println("Введите Фамилию Имя Отчество: ");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        String readString = reader.readLine();
-        int indexOf5 = readString.indexOf(' ');
-        int indexOf6 = readString.lastIndexOf(' ');
-        String fragment5 = readString.substring(0, indexOf5);
-        String fragment6 = readString.substring((indexOf5+1), indexOf6);
-        String fragment7 = readString.substring(indexOf6+1);
-        System.out.println("Фамилия: " + fragment5);
-        System.out.println("Имя: " + fragment6);
-        System.out.println("Отчество: " + fragment7);
+        try {
+            String readString = reader.readLine();
+            int indexOf5 = readString.indexOf(' ');
+            int indexOf6 = readString.lastIndexOf(' ');
+            if(indexOf5 == -1){
+                System.out.println("Информация введена не корректно! Ведите больше одного слова.");
+            }
+            else if(indexOf5 == indexOf6){
+                System.out.println("Информация введена не корректно! Ведите больше двух слов.");
+            }
+            else if((readString.indexOf(' ', indexOf5 + 1)) != indexOf6){
+                System.out.println("Информация введена не корректно! Ведите не больше трёх слов.");
+            }
+            else {
+                String fragment5 = readString.substring(0, indexOf5);
+                String fragment6 = readString.substring((indexOf5 + 1), indexOf6);
+                String fragment7 = readString.substring(indexOf6 + 1);
+                System.out.println("Фамилия: " + fragment5.trim());
+                System.out.println("Имя: " + fragment6.trim());
+                System.out.println("Отчество: " + fragment7.trim());
+            }
 
-
-
-//      Символы сhar (кроме Ё, ё). Заглавные буквы от 1040 до 1071 включительно. Прописные буквы от 1072 до 1103 включительно, ё - 1105, Ё - 1025.
+            reader.close();
+        } catch (StringIndexOutOfBoundsException e) {
+            System.out.println("Информация введена не корректно!");
+        }
 
     }
 }
